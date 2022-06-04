@@ -41,6 +41,7 @@ app.get(
 );
 
 app.get("/protected", isLoggedIn, (req, res) => {
+  res.cookie("auth", req.user._id);
   res.redirect("https://payment-split-app-frontend.vercel.app/dashboard");
 });
 
