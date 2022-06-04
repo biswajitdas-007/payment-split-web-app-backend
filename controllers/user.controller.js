@@ -1,7 +1,6 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-require("./passportConfig")(passport);
 
 const User = require("../models/user.model");
 
@@ -36,22 +35,22 @@ router.get("/user", async function (req, res) {
 //   }
 // });
 
-router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["email", "profile"] })
-);
+// router.get(
+//   "/auth/google",
+//   passport.authenticate("google", { scope: ["email", "profile"] })
+// );
 
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/auth/google/success",
-    failureRedirect: "/auth/google/failure",
-  }),
-  (req, res) => {
-    // console.log("req.user: ", req.user);
-    res.cookie("auth", req.user._id);
-    res.redirect(`https://locahost:3000`);
-  }
-);
+// router.get(
+//   "/auth/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect: "/auth/google/success",
+//     failureRedirect: "/auth/google/failure",
+//   }),
+//   (req, res) => {
+//     // console.log("req.user: ", req.user);
+//     res.cookie("auth", req.user._id);
+//     res.redirect(`https://locahost:3000`);
+//   }
+// );
 
 module.exports = router;
