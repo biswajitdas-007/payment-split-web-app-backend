@@ -6,6 +6,11 @@ const http = require("http");
 require("dotenv").config();
 require("./auth");
 
+const connect = require("./db/db.js");
+
+const userRouter = require("./controllers/user.controller");
+const expenditureRouter = require("./controllers/expenditure.controller");
+
 const app = express();
 const server = http.createServer(app);
 
@@ -22,10 +27,6 @@ app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res) => {
-  res.send('<a href="/auth/google">Authenticate with Google</a>');
-});
-
 app.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
@@ -40,7 +41,7 @@ app.get(
 );
 
 app.get("/protected", isLoggedIn, (req, res) => {
-  res.send(`Hello ${req.user.displayName}`);
+  res.redirect("https://payment-split-app-frontend.vercel.app/dashboard");
 });
 
 app.get("/logout", (req, res) => {
@@ -53,4 +54,7 @@ app.get("/auth/google/failure", (req, res) => {
   res.send("Failed to authenticate..");
 });
 
-app.listen(PORT, () => console.log("listening on port: 5000"));
+app.listen(PORT, () => {
+    await connect();
+    console.log("listening on port: 5000")
+});
