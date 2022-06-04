@@ -54,6 +54,9 @@ app.get("/auth/google/failure", (req, res) => {
   res.send("Failed to authenticate..");
 });
 
+// app.use("/", userRouter);
+app.use("/", expenditureRouter);
+
 app.listen(PORT, async () => {
   await connect();
   console.log("listening on port: 5000");
