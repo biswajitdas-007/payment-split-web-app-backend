@@ -74,6 +74,7 @@ app.get("/auth/google/failure", (req, res) => {
 
 // app.use("/", userRouter);
 app.use("/", expenditureRouter);
+app.use("/", userRouter);
 
 server.listen(PORT, async () => {
   await connect();
