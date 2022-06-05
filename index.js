@@ -52,6 +52,17 @@ app.get(
   })
 );
 
+router.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "successfull",
+      user: req.user,
+      //   cookies: req.cookies
+    });
+  }
+});
+
 app.get("/protected", isLoggedIn, (req, res) => {
   res.send(req.user);
 });
