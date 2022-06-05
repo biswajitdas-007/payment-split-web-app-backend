@@ -4,7 +4,7 @@ const router = express.Router();
 
 const User = require("../models/user.model");
 
-router.get("/user", async function (req, res) {
+router.get("/get-users", async function (req, res) {
   try {
     const userDomain = await User.find().lean().exec();
     return res.send(userDomain);
@@ -52,5 +52,14 @@ router.get("/user", async function (req, res) {
 //     res.redirect(`https://locahost:3000`);
 //   }
 // );
+
+router.get("/user", async (req, res) => {
+  try {
+    const user = await User.findById(req.body.id).lean().exec();
+    return res.send(user);
+  } catch (err) {
+    return res.status(400).send(err.message);
+  }
+});
 
 module.exports = router;
