@@ -65,7 +65,9 @@ app.get("/login/success", (req, res) => {
 });
 
 app.get("/protected", isLoggedIn, (req, res) => {
-  res.send(req.user);
+  res.redirect(
+    `https://payment-split-app-frontend.vercel.app/dashboard?id=${req.user._id}`
+  );
 });
 
 app.get("/logout", (req, res) => {
