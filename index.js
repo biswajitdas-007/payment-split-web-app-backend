@@ -75,7 +75,7 @@ app.get("/auth/google/failure", (req, res) => {
 // app.use("/", userRouter);
 app.use("/", expenditureRouter);
 
-app.listen(PORT, async () => {
+server.listen(PORT, async () => {
   await connect();
   console.log("listening on port: 5000");
 });
