@@ -29,6 +29,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
 }
