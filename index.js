@@ -53,6 +53,7 @@ app.get(
 );
 
 app.get("/login/success", (req, res) => {
+  console.log("req: ", req);
   if (req.user) {
     res.status(200).json({
       success: true,
